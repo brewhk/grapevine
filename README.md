@@ -1,0 +1,1 @@
+This repository houses the accompanying code for the [Build a React Application from First Principles](http://blog.brew.com.hk/build-a-react-application-from-first-principles-introduction/) tutorial.
