@@ -5,11 +5,17 @@
   <title>Grapevine</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react-dom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.js"></script>
 </head>
 <body>
   <div id="renderTarget"></div>
-  <script>
-    var App = React.createElement('h1', null, 'Welcome to Grapevine!');
+  <script type="text/babel">
+    var App = (
+      <div>
+        <div><img src="./img/logo.png" /></div>
+        <footer>© 2016 Brew Creative Limited. All rights reserved.</footer>
+      </div>
+    );
     ReactDOM.render(App, document.getElementById('renderTarget'));
   </script>
 </body>
