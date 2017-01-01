@@ -10,9 +10,32 @@
 <body>
   <div id="renderTarget"></div>
   <script type="text/babel">
+    var RegistrationForm = React.createClass({
+      handleSubmit: function (e) {
+        e.preventDefault();
+        console.log(this.email.value);
+        console.log(this.password.value);
+      },
+      render: function () {
+        return (
+          <form onSubmit={this.handleSubmit}>
+            <label htmlFor="registration-form__input-email">
+              Email
+              <input id="registration-form__input-email" type="email" ref={(function (c) { this.email = c }).bind(this)} />
+            </label><br/>
+            <label htmlFor="registration-form__input-password">
+              Password
+              <input id="registration-form__input-password" type="password" ref={(function (c) { this.password = c }).bind(this)} />
+            </label>
+            <input type="submit" />
+          </form>
+        );
+      }
+    });
     var App = (
       <div>
         <div><img src="./img/logo.png" /></div>
+        <RegistrationForm />
         <footer>© 2016 Brew Creative Limited. All rights reserved.</footer>
       </div>
     );
