@@ -6,40 +6,162 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react-dom.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
 </head>
 <body>
   <div id="renderTarget"></div>
+  <script>
+    var config = {
+      apiKey: "AIzaSyAKZQWBbnb5N3Ovkx5afBQuvnyVudSobwo",
+      authDomain: "grapevine-84264.firebaseapp.com",
+      databaseURL: "https://grapevine-84264.firebaseio.com",
+      storageBucket: "grapevine-84264.appspot.com",
+      messagingSenderId: "209626311092"
+    };
+    firebase.initializeApp(config);
+  </script>
   <script type="text/babel">
     var RegistrationForm = React.createClass({
+      getInitialState: function () {
+        return {
+          errorMessage: '',
+        };
+      },
       handleSubmit: function (e) {
         e.preventDefault();
-        console.log(this.email.value);
-        console.log(this.password.value);
+        var self = this;
+        firebase.auth().createUserWithEmailAndPassword(this.email.value, this.password.value)
+          .then(function(user) {
+            console.log('User created successfully!');
+            console.log(user);
+          })
+          .catch(function(error) {
+            console.log('Sign Up failed. See details below:');
+            console.log(error);
+            self.setState({
+              errorMessage: error.message,
+            });
+          });
+      },
+      handleInputChange: function () {
+        this.setState({
+          errorMessage: '',
+        })
       },
       render: function () {
         return (
-          <form onSubmit={this.handleSubmit}>
-            <label htmlFor="registration-form__input-email">
-              Email
-              <input id="registration-form__input-email" type="email" ref={(function (c) { this.email = c }).bind(this)} />
-            </label><br/>
-            <label htmlFor="registration-form__input-password">
-              Password
-              <input id="registration-form__input-password" type="password" ref={(function (c) { this.password = c }).bind(this)} />
-            </label>
-            <input type="submit" />
-          </form>
+          <div>
+            <h3>Register</h3>
+            <form onSubmit={this.handleSubmit}>
+              <label htmlFor="registration-form__input-email">
+                Email
+    <input id="registration-form__input-email" type="email" ref={(function (c) { this.email = c }).bind(this)} onChange={this.handleInputChange} />
+              </label><br/>
+              <label htmlFor="registration-form__input-password">
+                Password
+      <input id="registration-form__input-password" type="password" ref={(function (c) { this.password = c }).bind(this)} onChange={this.handleInputChange} />
+              </label><br/>
+              <input type="submit" />
+              <div>{this.state.errorMessage}</div>
+            </form>
+          </div>
         );
       }
     });
-    var App = (
-      <div>
-        <div><img src="./img/logo.png" /></div>
-        <RegistrationForm />
-        <footer>© 2016 Brew Creative Limited. All rights reserved.</footer>
-      </div>
-    );
-    ReactDOM.render(App, document.getElementById('renderTarget'));
+
+    var LogInForm = React.createClass({
+      getInitialState: function () {
+        return {
+          errorMessage: '',
+        };
+      },
+      handleSubmit: function (e) {
+        e.preventDefault();
+        var self = this;
+        firebase.auth().signInWithEmailAndPassword(this.email.value, this.password.value)
+          .then(function(user) {
+            console.log('You have logged in successfully!');
+            console.log(user);
+          })
+          .catch(function(error) {
+            console.log('Log In failed! See details below:');
+            console.log(error);
+            self.setState({
+              errorMessage: error.message,
+            });
+          });
+      },
+      handleInputChange: function () {
+        this.setState({
+          errorMessage: '',
+        })
+      },
+      render: function () {
+        return (
+          <div>
+            <h3>Log In</h3>
+            <form onSubmit={this.handleSubmit}>
+              <label htmlFor="log-in-form__input-email">
+                Email
+          <input id="log-in-form__input-email" type="email" ref={(function (c) { this.email = c }).bind(this)} onChange={this.handleInputChange} />
+              </label><br/>
+              <label htmlFor="log-in-form__input-password">
+                Password
+      <input id="log-in-form__input-password" type="password" ref={(function (c) { this.password = c }).bind(this)} onChange={this.handleInputChange} />
+              </label><br/>
+              <input type="submit" />
+              <div>{this.state.errorMessage}</div>
+            </form>
+          </div>
+        );
+      }
+    });
+
+    var LogOutButton = React.createClass({
+      handleLogOut: function() {
+        firebase.auth().signOut();
+      },
+      render: function () {
+        return <button onClick={this.handleLogOut}>Log Out</button>
+      }
+    });
+
+    var Header = function (props) {
+      return (
+        <div>
+          <img src="./img/logo.png" />
+          {
+            props.userIsLoggedIn ? <div><p>You're logged in!</p><LogOutButton/></div> : <p>Register or log In below</p>
+          }
+        </div>
+      )
+    }
+
+    var App = React.createClass({
+      getInitialState: function () {
+        return {
+          userIsLoggedIn: false
+        };
+      },
+      componentWillMount: function () {
+        firebase.auth().onAuthStateChanged(function(user) {
+          this.setState({
+            userIsLoggedIn: user ? true : false,
+          });
+        }.bind(this));
+      },
+      render: function () {
+        return (
+          <div>
+            <Header userIsLoggedIn={this.state.userIsLoggedIn} />
+            { this.state.userIsLoggedIn ? <p>This is where the posts will go!</p> : <div><RegistrationForm /><LogInForm/></div> }
+            <footer>© 2016 Brew Creative Limited. All rights reserved.</footer>
+          </div>
+        )
+      }
+    });
+
+    ReactDOM.render(<App />, document.getElementById('renderTarget'));
   </script>
 </body>
 </html>
