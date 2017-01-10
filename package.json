@@ -1,0 +1,27 @@
+{
+  "devDependencies": {
+    "jspm": "0.17.0-beta.32"
+  },
+  "jspm": {
+    "name": "grapevine",
+    "main": "grapevine.js",
+    "dependencies": {
+      "babel-preset-react": "npm:babel-preset-react@^6.16.0",
+      "plugin-babel": "npm:systemjs-plugin-babel@^0.0.18"
+    },
+    "devDependencies": {},
+    "peerDependencies": {
+      "fs": "npm:jspm-nodelibs-fs@^0.2.0",
+      "path": "npm:jspm-nodelibs-path@^0.2.0",
+      "process": "npm:jspm-nodelibs-process@^0.2.0"
+    },
+    "overrides": {
+      "npm:lodash@4.17.4": {
+        "map": {
+          "buffer": "@empty",
+          "process": "@empty"
+        }
+      }
+    }
+  }
+}
