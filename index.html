@@ -3,42 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Grapevine</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react-dom.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.41/system.js"></script>
-  <script src="./jspm.config.js"></script>
 </head>
 <body>
   <div id="renderTarget"></div>
-  <script>
-    var config = {
-      apiKey: "AIzaSyAKZQWBbnb5N3Ovkx5afBQuvnyVudSobwo",
-      authDomain: "grapevine-84264.firebaseapp.com",
-      databaseURL: "https://grapevine-84264.firebaseio.com",
-      storageBucket: "grapevine-84264.appspot.com",
-      messagingSenderId: "209626311092"
-    };
-    firebase.initializeApp(config);
-  </script>
-  <script type="text/babel">
-    SystemJS.config({
-      meta: {
-        '*.jsx': {
-          'loader': 'plugin-babel',
-          'format': 'cjs',
-          'babelOptions': {
-            'modularRuntime': false,
-            stage1: true,
-            presets: ['babel-preset-react']
-          }
-        }
-      },
-    });
-    var App = SystemJS.import('./components/App.jsx').then(App => {
-      ReactDOM.render(<App />, document.getElementById('renderTarget'));
-    });
-  </script>
+  <script src="./dist/bundle.js"></script>
 </body>
 </html>

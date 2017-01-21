@@ -1,3 +1,5 @@
+var React = require('react');
+var ReactDOM = require('react-dom');
 var LogOutButton = require('./LogOutButton.jsx');
 
 var Header = function (props) {

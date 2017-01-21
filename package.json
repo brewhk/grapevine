@@ -1,27 +1,14 @@
 {
   "devDependencies": {
-    "jspm": "0.17.0-beta.32"
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
+    "webpack": "beta"
   },
-  "jspm": {
-    "name": "grapevine",
-    "main": "grapevine.js",
-    "dependencies": {
-      "babel-preset-react": "npm:babel-preset-react@^6.16.0",
-      "plugin-babel": "npm:systemjs-plugin-babel@^0.0.18"
-    },
-    "devDependencies": {},
-    "peerDependencies": {
-      "fs": "npm:jspm-nodelibs-fs@^0.2.0",
-      "path": "npm:jspm-nodelibs-path@^0.2.0",
-      "process": "npm:jspm-nodelibs-process@^0.2.0"
-    },
-    "overrides": {
-      "npm:lodash@4.17.4": {
-        "map": {
-          "buffer": "@empty",
-          "process": "@empty"
-        }
-      }
-    }
+  "dependencies": {
+    "firebase": "^3.6.6",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
   }
 }

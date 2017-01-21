@@ -1,3 +1,7 @@
+var React = require('react');
+var ReactDOM = require('react-dom');
+var firebase = require('firebase');
+
 var RegistrationForm = React.createClass({
   getInitialState: function () {
     return {

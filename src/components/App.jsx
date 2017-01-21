@@ -1,3 +1,7 @@
+var React = require('react');
+var ReactDOM = require('react-dom');
+var firebase = require('firebase');
+
 var Header = require('./Header.jsx');
 var RegistrationForm = require('./RegistrationForm.jsx');
 var LogInForm = require('./LogInForm.jsx');
