@@ -1,25 +1,28 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var firebase = require('firebase');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import firebase from 'firebase';
 
-var Header = require('./Header.jsx');
-var RegistrationForm = require('./RegistrationForm.jsx');
-var LogInForm = require('./LogInForm.jsx');
+import Header from './Header.jsx';
+import RegistrationForm from './RegistrationForm.jsx';
+import LogInForm from './LogInForm.jsx';
 
-var App = React.createClass({
-  getInitialState: function () {
-    return {
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       userIsLoggedIn: false
-    };
-  },
-  componentWillMount: function () {
-    firebase.auth().onAuthStateChanged(function(user) {
+    }
+  }
+
+  componentWillMount() {
+    firebase.auth().onAuthStateChanged((user) => {
       this.setState({
         userIsLoggedIn: user ? true : false,
       });
-    }.bind(this));
-  },
-  render: function () {
+    });
+  }
+
+  render() {
     return (
       <div>
         <Header userIsLoggedIn={this.state.userIsLoggedIn} />
@@ -28,6 +31,6 @@ var App = React.createClass({
       </div>
     )
   }
-});
+};
 
-module.exports = App;
+export default App;

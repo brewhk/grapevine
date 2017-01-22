@@ -1,9 +1,9 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var firebase = require('firebase');
-var App = require('./components/App.jsx');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import firebase from 'firebase';
+import App from './components/App.jsx';
 
-var config = {
+const config = {
   apiKey: "AIzaSyAKZQWBbnb5N3Ovkx5afBQuvnyVudSobwo",
   authDomain: "grapevine-84264.firebaseapp.com",
   databaseURL: "https://grapevine-84264.firebaseio.com",

@@ -1,14 +1,15 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var firebase = require('firebase');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import firebase from 'firebase';
 
-var LogOutButton = React.createClass({
-  handleLogOut: function() {
+class LogOutButton extends React.Component {
+  handleLogOut() {
     firebase.auth().signOut();
-  },
-  render: function () {
+  }
+
+  render() {
     return <button onClick={this.handleLogOut}>Log Out</button>
   }
-});
+};
 
-module.exports = LogOutButton;
+export default LogOutButton;

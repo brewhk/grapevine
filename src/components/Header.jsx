@@ -1,8 +1,8 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var LogOutButton = require('./LogOutButton.jsx');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import LogOutButton from './LogOutButton.jsx';
 
-var Header = function (props) {
+const Header = function (props) {
   return (
     <div>
       <img src="./img/logo.png" />
@@ -13,4 +13,4 @@ var Header = function (props) {
   )
 }
 
-module.exports = Header;
+export default Header;

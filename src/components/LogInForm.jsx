@@ -1,46 +1,49 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var firebase = require('firebase');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import firebase from 'firebase';
 
-var LogInForm = React.createClass({
-  getInitialState: function () {
-    return {
+class LogInForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       errorMessage: '',
-    };
-  },
-  handleSubmit: function (e) {
+    }
+  }
+
+  handleSubmit(e) {
     e.preventDefault();
-    var self = this;
     firebase.auth().signInWithEmailAndPassword(this.email.value, this.password.value)
-      .then(function(user) {
+      .then((user) => {
         console.log('You have logged in successfully!');
         console.log(user);
       })
-      .catch(function(error) {
+      .catch((error) => {
         console.log('Log In failed! See details below:');
         console.log(error);
-        self.setState({
+        this.setState({
           errorMessage: error.message,
         });
       });
-  },
-  handleInputChange: function () {
+  }
+
+  handleInputChange() {
     this.setState({
       errorMessage: '',
     })
-  },
-  render: function () {
+  }
+
+  render() {
     return (
       <div>
         <h3>Log In</h3>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit.bind(this)}>
           <label htmlFor="log-in-form__input-email">
             Email
-      <input id="log-in-form__input-email" type="email" ref={(function (c) { this.email = c }).bind(this)} onChange={this.handleInputChange} />
+            <input id="log-in-form__input-email" type="email" ref={((c) => { this.email = c }).bind(this)} onChange={this.handleInputChange.bind(this)} />
           </label><br/>
           <label htmlFor="log-in-form__input-password">
             Password
-  <input id="log-in-form__input-password" type="password" ref={(function (c) { this.password = c }).bind(this)} onChange={this.handleInputChange} />
+            <input id="log-in-form__input-password" type="password" ref={((c) => { this.password = c }).bind(this)} onChange={this.handleInputChange.bind(this)} />
           </label><br/>
           <input type="submit" />
           <div>{this.state.errorMessage}</div>
@@ -48,6 +51,6 @@ var LogInForm = React.createClass({
       </div>
     );
   }
-});
+};
 
-module.exports = LogInForm;
+export default LogInForm;
